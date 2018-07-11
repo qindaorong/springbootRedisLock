@@ -47,8 +47,14 @@ public class ZhengToonRedisLockConfiguration {
         if(!StringUtils.isEmpty(password)){
             config.useSingleServer().setPassword(password);
         }
-
         redisson = Redisson.create(config);
+
+        if(redisson == null ){
+            logger.warn("RedissonClient is null, redis can't link ! redis lock can not used !");
+        }else{
+            logger.info("RedissonClient has created , redis lock can used !");
+        }
+
         logger.info("RedissonClient end init");
     }
 
